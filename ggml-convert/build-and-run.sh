@@ -7,7 +7,6 @@ if [ $# -eq 3 ]; then
     MODEL_DIRECTORY="$1"
     MODEL_FILE="$2"
     OUTPUT_TYPE="$3"
-    echo aaa
 elif [ $# -eq 2 ]; then
     MODEL_DIRECTORY="$1"
     MODEL_FILE="$2"
@@ -24,7 +23,7 @@ cd "$(dirname -- "$0")"
 docker build -t "${DOCKER_TAG}" .
 
 docker run --rm -it \
-    --mount type=bind,source="$MODEL_DIRECTORY,target=/models/" \
+    --mount type=bind,source="${MODEL_DIRECTORY},target=/models/" \
     "${DOCKER_TAG}" \
-    "$MODEL_FILE" \
-    --out_type "$OUTPUT_TYPE"
+    "${MODEL_FILE}" \
+    --out_type "${OUTPUT_TYPE}"
